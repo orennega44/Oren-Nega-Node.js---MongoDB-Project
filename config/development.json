@@ -1,0 +1,7 @@
+{
+	"TOKEN_GENERATION": "jwt",
+	"VALIDATION": "Joi",
+	"DB": "MongoDB",
+	"ENVIRONMENT": "development",
+	"LOGGER": "morgan"
+}
