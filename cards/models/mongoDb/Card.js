@@ -1,4 +1,4 @@
-const { mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 const { DEFAULT_VALIDATION, PHONE, EMAIL, URL } = require("../../../helpers/mongodb/mongooshValidation");
 const { Image } = require('../../../helpers/mongodb/Image');
 const { Address } = require("../../../helpers/mongodb/Address");

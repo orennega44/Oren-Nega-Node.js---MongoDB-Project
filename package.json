@@ -1,25 +1,29 @@
 {
-  "name": "node.js-project",
-  "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Oren Nega",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "chalk": "4.1",
-    "config": "^3.3.12",
-    "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "joi": "^17.13.3",
-    "jsonwebtoken": "^9.0.2",
-    "lodash": "^4.17.21",
-    "mongoose": "^8.9.5",
-    "morgan": "^1.10.0"
-  }
+	"name": "node.js-project",
+	"version": "1.0.0",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "cross-env NODE_ENV=production node app",
+		"dev": "cross-env NODE_ENV=development nodemon app"
+	},
+	"author": "Oren Nega",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"chalk": "4.1",
+		"config": "^3.3.12",
+		"cors": "^2.8.5",
+		"cross-env": "^7.0.3",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"fs": "^0.0.1-security",
+		"joi": "^17.13.3",
+		"jsonwebtoken": "^9.0.2",
+		"lodash": "^4.17.21",
+		"mongoose": "^8.9.5",
+		"morgan": "^1.10.0",
+		"path": "^0.12.7"
+	}
 }

@@ -5,35 +5,59 @@ const DB = config.get("DB");
 
 
 const getCards = async () => {
-    try {
-        let cards = await Card.find({})
-        return cards;
-    } catch (error) {
 
-        return createError("DataBase: ", error);
+    if (DB === "MongoDB") {
+        try {
+            let cards = await Card.find({})
+            
+            return cards;
+        } catch (error) {
+
+            return createError("DataBase: ", error);
+        }
     }
-} 
+
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
+
+}
 
 
 const getMyCards = async (userId) => {
 
-    try {
-        let cards = await Card.find({ user_id: userId });
-        return cards;
-    } catch (error) {
-        return createError("DataBase: ", error);
+    if (DB === "MongoDB") {
+
+        try {
+            let cards = await Card.find({ user_id: userId });
+            return cards;
+        } catch (error) {
+            return createError("DataBase: ", error);
+        }
     }
+
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
+
 }
 
 
 
 const getCard = async (cardId) => {
-    try {
-        let card = await Card.findById(cardId);
-        return card;
-    } catch (error) {
-        return createError("DataBase: ", error);
+
+    if (DB === "MongoDB") {
+        try {
+            let card = await Card.findById(cardId);
+            return card;
+        } catch (error) {
+            return createError("DataBase: ", error);
+        }
     }
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
+
 
 }
 
@@ -60,55 +84,75 @@ const createCard = async (newCard) => {
 
 const updateCard = async (cardId, newCard) => {
 
-    try {
-        let card = await Card.findByIdAndUpdate(cardId, newCard, { new: true })
-        return card;
-    } catch (error) {
-        return createError("DataBase: ", error);
+    if (DB === "MongoDB") {
+
+        try {
+            let card = await Card.findByIdAndUpdate(cardId, newCard, { new: true })
+            return card;
+        } catch (error) {
+            return createError("DataBase: ", error);
+        }
     }
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
+
 }
 
 
 const likeCard = async (cardId, userId) => {
 
-    try {
-        let card = await Card.findById(cardId);
+    if (DB === "MongoDB") {
 
-        if (!card) {
-            const error = new Error("this card is not found in the data base")
-            error.status = 404
-            return createError("Mongoose: ", error);
+        try {
+            let card = await Card.findById(cardId);
+
+            if (!card) {
+                const error = new Error("this card is not found in the data base")
+                error.status = 404
+                return createError("Mongoose: ", error);
+            }
+
+            if (card.likes.includes(userId)) {
+                let newLikeArr = card.likes.filter((id) => { id != userId })
+                card.likes = newLikeArr;
+
+            } else {
+
+                card.likes.push(userId);
+            }
+
+            await card.save();
+            return card;
+
+
+        } catch (error) {
+            return createError("DataBase: ", error);
         }
-
-        if (card.likes.includes(userId)) {
-            let newLikeArr = card.likes.filter((id) => { id != userId })
-            card.likes = newLikeArr;
-
-        } else {
-
-            card.likes.push(userId);
-        }
-
-        await card.save();
-        return card;
-
-
-    } catch (error) {
-        return createError("DataBase: ", error);
     }
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
 }
 
 
 const deleteCard = async (cardId) => {
 
-    try {
-        let card = await Card.findByIdAndDelete(cardId);
+    if (DB === "MongoDB") {
 
-        return card;
+        try {
+            let card = await Card.findByIdAndDelete(cardId);
 
-    } catch (error) {
-        return createError("DataBase: ", error);
+            return card;
+
+        } catch (error) {
+            return createError("DataBase: ", error);
+        }
     }
+    const error = new Error("Ther Is No Other DataBase For This Request");
+    error.status = 500;
+    return createError("DataBase: ", error);
+
 
 
 }
