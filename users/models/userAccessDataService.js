@@ -15,7 +15,7 @@ const RegisterUser = async (newUser) => {
 
         newUser.password = generatePassword(newUser.password);
 
-        let user = await new User(newUser);
+        let user = new User(newUser);
         user = await user.save();
 
         user = { email: user.email, name: user.name, _id: user._id };
@@ -26,6 +26,8 @@ const RegisterUser = async (newUser) => {
         console.error("Mongoose: " + error.message);
 
     }
+
+    
 }
 
 

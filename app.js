@@ -1,6 +1,6 @@
 const express = require('express');
-const connectToDB = require('./DB/mongoDB/connectToMongoLocaly');
-const loger = require('./serverLog/loggerMiddleware');
+const connectToDB = require('./DB/dbService');
+const loger = require('./serverLog/loggerMiddleware')
 const router = require('./router/router')
 const coreMiddlewar = require('./middlewares/cors');
 const chalk = require('chalk');
@@ -16,21 +16,20 @@ app.use(coreMiddlewar);
 app.use(express.json());
 app.use(logerMiddlewer());
 app.use(router);
-app.use(loger);
+app.use(loger)
+
 
 app.use((err, req, res, next) => {
     const message = err || "Internal Server Error!";
-    return  handleError(res, 500, message)
+    return handleError(res, 500, message)
 });
 
 
 
 
-app.listen(PORT,  async () => {
-    console.log(chalk.bgCyanBright.black(`server connected to port ${PORT}!`) );
+app.listen(PORT, async () => {
+    console.log(chalk.bgCyanBright.black(`server running on port ${PORT}!`));
     await connectToDB();
-
-    
 
 })
 
