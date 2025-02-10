@@ -18,7 +18,7 @@ const joiValidateCard = (card) => {
         }).required(),
         address: Joi.object().keys({
             state: Joi.string().allow(""),
-            contry: Joi.string().required(),
+            country: Joi.string().required(),
             city: Joi.string().required(),
             street: Joi.string().required(),
             houseNumber: Joi.number().required(),

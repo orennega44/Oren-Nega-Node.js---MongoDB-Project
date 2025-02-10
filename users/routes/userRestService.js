@@ -7,10 +7,9 @@ const router = express.Router();
 
 
 
-router.post("/users", auth, async (req, res) => {
+router.post("/", async (req, res) => {
 
     try {
-
         let user = await RegisterUser(req.body);
         res.send(user);
     } catch (error) {
@@ -20,20 +19,21 @@ router.post("/users", auth, async (req, res) => {
 
 })
 
-router.post("/users/login", auth, async (req, res) => {
+router.post("/login",  async (req, res) => {
     try {
         let { email, password } = req.body;
         const token = await userLogin(email, password);
         res.send(token)
 
     } catch (error) {
+        res.status(500).send(error.message || "Internal Server Error");
 
     }
 })
 
 
 
-router.get('/users', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
 
     try {
         const userInfo = req.user;
@@ -46,7 +46,7 @@ router.get('/users', auth, async (req, res) => {
 })
 
 
-router.get("/users/:id", auth, async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     try {
 
         const { id } = req.params;
@@ -58,7 +58,7 @@ router.get("/users/:id", auth, async (req, res) => {
     }
 })
 
-router.put("/users/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const newUser = req.body;
@@ -82,7 +82,7 @@ router.put("/users/:id", async (req, res) => {
 })
 
 
-router.patch("/users/:id", auth, async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
 
     
     try {
@@ -98,7 +98,7 @@ router.patch("/users/:id", auth, async (req, res) => {
     }
 })
 
-router.delete('/users/:id', auth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 
     try {
 

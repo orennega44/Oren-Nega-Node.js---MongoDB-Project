@@ -39,19 +39,23 @@ const userLogin = async (email, password) => {
         }
 
         if (!comparePassword(password, userFromDB.password)) {
-            throw new Error("Password Missmatch!")
+            const error = Error("Password Missmatch");
+            error.status = 401;
+            createError("Authentication", error);
 
         }
 
+        
+        console.log(chalk.bgGreenBright("You Are Loged In!"));
+        
         const token = generateAuthToken(userFromDB);
-
-        console.log(chalk.bgGreen("You Are Loged In!"));
-
 
         return token;
 
     } catch (error) {
         console.error("Mongoose: " + error.message);
+        
+        
     }
 }
 

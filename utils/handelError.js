@@ -11,7 +11,6 @@ const createError = (validetor, error) => {
     throw new Error(error);
 }
 
-
 const handleError = (res, status, message = "") => {
 
     console.log(chalk.bgRedBright.white(message));

@@ -1,5 +1,5 @@
 const { createError } = require("../../utils/handelError");
-const Card = require("../models/mongoDb/Card")
+const Card = require("../models/mongoDB/Card")
 const _ = require('lodash');
 
 const generateBizNum = async () => {

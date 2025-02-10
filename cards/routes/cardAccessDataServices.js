@@ -1,6 +1,6 @@
 const config = require("config");
 const { createError } = require('../../utils/handelError');
-const Card = require('../models/mongoDb/Card')
+const Card = require('../models/mongoDB/Card')
 const DB = config.get("DB");
 
 
@@ -9,7 +9,7 @@ const getCards = async () => {
     if (DB === "MongoDB") {
         try {
             let cards = await Card.find({})
-            
+
             return cards;
         } catch (error) {
 

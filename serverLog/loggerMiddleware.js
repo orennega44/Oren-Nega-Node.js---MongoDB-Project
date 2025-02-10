@@ -48,7 +48,7 @@ const loggerMiddleware = (err, req, res, next) => {
 
     if (statusCode >= 400) {
         const now = new Date();
-        const logFileName = `${now.toISOString().split('T')[0]}.log`; // e.g., 2025-02-09.log
+        const logFileName = `${now.toISOString().split('T')[0]}.txt`; // e.g., 2025-02-09.log
         const logFilePath = path.join(logsDir, logFileName);
 
         const logMessage = `[${now.toISOString()}] ${req.method} ${req.url} - Status: ${statusCode} - Error: ${err.message || 'Unknown error'}\n`;

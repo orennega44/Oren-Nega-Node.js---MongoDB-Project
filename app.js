@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
 const express = require('express');
-const connectToMongoLocaly = require('./DB/mongoDB/connectToMongoLocaly');
+const connectToDB = require('./DB/mongoDB/connectToMongoLocaly');
 const loger = require('./serverLog/loggerMiddleware');
-const loggerMiddleware = require('./serverLog/loggerMiddleware')
 const router = require('./router/router')
 const coreMiddlewar = require('./middlewares/cors');
 const chalk = require('chalk');
 const logerMiddlewer = require('./logger/logerService');
+const { handleError } = require('./utils/handelError');
 require("dotenv").config();
 
 
@@ -15,22 +14,23 @@ const PORT = process.env.PORT || 8000;
 app.use(express.static("./public"));
 app.use(coreMiddlewar);
 app.use(express.json());
-app.use(loggerMiddleware);
+app.use(logerMiddlewer());
 app.use(router);
 app.use(loger);
 
 app.use((err, req, res, next) => {
     const message = err || "Internal Server Error!";
-    return handleError(res, 500, message)
-
+    return  handleError(res, 500, message)
 });
 
 
 
 
-app.listen(PORT, () => {
-    console.log(`server connected to port ${PORT}!`);
-    connectToMongoLocaly();
+app.listen(PORT,  async () => {
+    console.log(chalk.bgCyanBright.black(`server connected to port ${PORT}!`) );
+    await connectToDB();
+
+    
 
 })
 
