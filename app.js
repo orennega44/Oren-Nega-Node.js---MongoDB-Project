@@ -1,6 +1,5 @@
 const express = require('express');
 const connectToDB = require('./DB/dbService');
-const loger = require('./serverLog/loggerMiddleware')
 const router = require('./router/router')
 const coreMiddlewar = require('./middlewares/cors');
 const chalk = require('chalk');
@@ -16,7 +15,6 @@ app.use(coreMiddlewar);
 app.use(express.json());
 app.use(logerMiddlewer());
 app.use(router);
-app.use(loger)
 
 
 app.use((err, req, res, next) => {
